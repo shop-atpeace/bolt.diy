@@ -42,9 +42,9 @@
     "electron:build:linux": "rm -rf dist && pnpm electron:build:renderer && pnpm electron:build:deps && electron-builder --linux",
     "electron:build:dist": "rm -rf dist && pnpm electron:build:renderer && pnpm electron:build:deps && electron-builder --mwl"
   },
-  "engines": {
-    "node": ">=18.18.0"
-  },
+"engines": {
+  "node": "20.x"
+}
   "dependencies": {
     "@ai-sdk/amazon-bedrock": "1.0.6",
     "@ai-sdk/anthropic": "0.0.39",
