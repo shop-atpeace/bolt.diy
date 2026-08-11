@@ -1,4 +1,4 @@
-export const config = { runtime: 'edge' };
+export const runtime = "edge";
 import type { AppLoadContext } from '@remix-run/cloudflare';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
