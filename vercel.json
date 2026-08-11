@@ -1,10 +1,7 @@
 {
   "functions": {
     "api/**/*.js": {
-      "runtime": "edge"
-    },
-    "build/server/**/*.js": {
-      "runtime": "edge"
+      "maxDuration": 60
     }
   }
 }
