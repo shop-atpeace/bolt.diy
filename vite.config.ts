@@ -17,6 +17,11 @@ export default defineConfig((config) => {
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
+    resolve: {
+      alias: {
+        path: 'path-browserify',
+      },
+    },
     build: {
       target: 'esnext',
       // Fixes the "Adjust chunk size limit" build warning
@@ -24,14 +29,14 @@ export default defineConfig((config) => {
     },
     plugins: [
       nodePolyfills({
-        include: ['buffer', 'process', 'util', 'stream'],
+        include: ['buffer', 'process', 'util', 'stream', 'path'],
         globals: {
           Buffer: true,
           process: true,
           global: true,
         },
         protocolImports: true,
-        exclude: ['child_process', 'fs', 'path'],
+        exclude: ['child_process', 'fs'],
       }),
       {
         name: 'buffer-polyfill',
