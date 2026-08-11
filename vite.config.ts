@@ -1,4 +1,5 @@
-import { cloudflareDevProxyVitePlugin as remixCloudflareDevProxy, vitePlugin as remixVitePlugin } from '@remix-run/dev';
+import { vitePlugin as remixVitePlugin } from '@remix-run/dev';
+import { vercelPreset } from '@vercel/remix/vite';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, type ViteDevServer } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
@@ -18,6 +19,8 @@ export default defineConfig((config) => {
     },
     build: {
       target: 'esnext',
+      // Fixes the "Adjust chunk size limit" build warning
+      chunkSizeWarningLimit: 1500,
     },
     plugins: [
       nodePolyfills({
@@ -43,13 +46,16 @@ export default defineConfig((config) => {
           return null;
         },
       },
-      config.mode !== 'test' && remixCloudflareDevProxy(),
       remixVitePlugin({
+        // Configures Remix to use Vercel Serverless Functions instead of Cloudflare
+        presets: [vercelPreset()],
         future: {
           v3_fetcherPersist: true,
           v3_relativeSplatPath: true,
           v3_throwAbortReason: true,
           v3_lazyRouteDiscovery: true,
+          // Addresses the React Router / Remix data-fetching warning
+          v3_singleFetch: true,
         },
       }),
       UnoCSS(),
